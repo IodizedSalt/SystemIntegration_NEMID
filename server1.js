@@ -26,7 +26,6 @@ console.log('server listening on localhost:'+ PORT_NUM )
 
 
 
-
 })
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");
@@ -42,7 +41,7 @@ app.post('/token', function(req, res){
         if (err) {
             throw err;
         }
-
+        // this needs to respond with JSON??
         res.send(`${tokenEmail}:\n\nYour bank account balance is ${row.Balance}kr.`)
     });
 

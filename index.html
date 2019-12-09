@@ -46,8 +46,23 @@
             http.send(JSON.stringify(token)) 
             http.onload = function() {
                 alert(http.responseText)
-            }          
+            } 
+            // make a callback
+            doThis(message)
+
             }  
+
+            function doThis(message){
+                console.log('power overwhelming')
+                const httpPy = new XMLHttpRequest()
+                httpPy.open('POST', 'http://localhost:5000/token', true)
+                httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+                let token = message
+                httpPy.send("name=" + token) 
+                httpPy.onload = function() {
+                    alert(httpPy.responseText)
+                }  
+            }
           </script>
           
     </div>
