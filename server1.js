@@ -33,8 +33,8 @@ app.get('/', (req, res) => {
 
 app.post('/token', function(req, res){
     let tokenData = jwt.decode(req.body.token)
+    // console.log(tokenData)
     let tokenEmail = tokenData.email
-
     let sql = `SELECT balance Balance FROM users WHERE email = ?`
 
     skatDatabase.each(sql, [tokenEmail], (err, row) => {
@@ -42,7 +42,11 @@ app.post('/token', function(req, res){
             throw err;
         }
         // this needs to respond with JSON??
-        res.send(`${tokenEmail}:\n\nYour bank account balance is ${row.Balance}kr.`)
+        // res.send(`${tokenEmail}:\n\nYour bank account balance is ${row.Balance}kr.`)
+        res.json({
+            userEmail: tokenEmail,
+            userSkatBalance: row.Balance
+        });
     });
 
 })

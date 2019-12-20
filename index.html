@@ -45,26 +45,47 @@
             }
             http.send(JSON.stringify(token)) 
             http.onload = function() {
-                alert(http.responseText)
+                var jsonSkatBalance = http.responseText
+                renderSkat(jsonSkatBalance)
+
             } 
-            // make a callback
-            doThis(message)
+
+
+            const httpPy = new XMLHttpRequest()
+                httpPy.open('POST', 'http://localhost:5000/token', true)
+                httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+                // httpPy.setRequestHeader('content-type', 'application/xml');
+                let token1 = message
+                httpPy.send("name=" + token1) 
+                httpPy.onload = function() {
+                    renderBank(httpPy.responseText)
+
+                }  
 
             }  
 
-            function doThis(message){
-                console.log('power overwhelming')
-                const httpPy = new XMLHttpRequest()
-                httpPy.open('POST', 'http://localhost:5000/token', true)
-                httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                let token = message
-                httpPy.send("name=" + token) 
-                httpPy.onload = function() {
-                    alert(httpPy.responseText)
-                }  
+            function renderSkat(userInformationJSON){
+            let jsonDiv = document.getElementById("user-information-json")
+                jsonDiv.innerHTML = userInformationJSON;
+            }
+
+            function renderBank(userInformationXML){
+
+                let xmlDiv = document.getElementById("user-information-xml")
+                xmlDiv.innerHTML = userInformationXML;
+           
             }
           </script>
           
     </div>
+
+    <div id="user-information-json">
+
+    </div>
+
+    <div id="user-information-xml">
+
+    </div>
+
 </body>
 </html>
