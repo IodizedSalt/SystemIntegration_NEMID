@@ -2,8 +2,6 @@ const express = require('express')
 var app = express();
 var request = require('request')
 var bodyParser = require('body-parser');
-const fs = require('fs');
-const $ = require('cheerio')
 const jwt = require('jsonwebtoken')
 const sqlite3 = require('sqlite3').verbose();
 
@@ -33,7 +31,6 @@ app.get('/', (req, res) => {
 
 app.post('/token', function(req, res){
     let tokenData = jwt.decode(req.body.token)
-    // console.log(tokenData)
     let tokenEmail = tokenData.email
     let sql = `SELECT balance Balance FROM users WHERE email = ?`
 
@@ -41,8 +38,6 @@ app.post('/token', function(req, res){
         if (err) {
             throw err;
         }
-        // this needs to respond with JSON??
-        // res.send(`${tokenEmail}:\n\nYour bank account balance is ${row.Balance}kr.`)
         res.json({
             userEmail: tokenEmail,
             userSkatBalance: row.Balance

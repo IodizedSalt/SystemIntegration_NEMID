@@ -34,10 +34,11 @@ def getNextCase():
     balance = SubElement(top, 'balance')
     balance.text = str(userBankBalance)
 
-    print(tostring(top))
+    # print(tostring(top))
 
     return tostring(top)
 
 # app.run(host='localhost', port=8081, reloader=0)
 if __name__ == "__main__":
-    app.run()
+    # app.run()
+    app.run(host='0.0.0.0', port=8081)

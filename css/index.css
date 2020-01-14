@@ -1,3 +1,8 @@
 .nem-div{
     text-align: center;
 }
+
+#data-fields{
+    padding-left: 30%;
+    /* padding-right: 30%; */
+}

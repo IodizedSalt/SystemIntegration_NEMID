@@ -6,86 +6,156 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="index.css">   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
     <div class="nem-div">
-        <h1>Welcome to your Account.</h1>
-        <p>Please log in to NemID to see your information</p>
-        <iframe height="225px" width="200px" frameborder="0" src="http://80.210.70.4:3333/easyid-form.php"></iframe>
-        <script>
-           
-            if (window.addEventListener) {
-              window.addEventListener("message", onMessage, false);        
-            } 
-            else if (window.attachEvent) {
-                window.attachEvent("onmessage", onMessage, false);
-            }
-           
-            function onMessage(event) {
-                // Check sender origin to be trusted
-                if (event.origin !== "http://80.210.70.4:3333"){
-                  console.log('not allowed')
-                  return;
-                } 
-           
-                var data = event.data;
-           
-                if (typeof(window[data.func]) == "function") {
-                    window[data.func].call(null, data.message);
-                }
-            }
-           
-          // Function to be called from iframe
-          function parentFunc(message) {
-            const http = new XMLHttpRequest()
-            http.open('POST', 'http://localhost:8080/token', true)
-            http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
-            let token = {
-                token: message
-            }
-            http.send(JSON.stringify(token)) 
-            http.onload = function() {
-                var jsonSkatBalance = http.responseText
-                renderSkat(jsonSkatBalance)
+        <h1 class="display-3">Welcome to your Account.</h1>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Please log in to NemID to see your information</p>
+                <iframe height="225px" width="200px" frameborder="0" src="http://80.210.70.4:3333/easyid-form.php"></iframe>
 
-            } 
+                <script>
+                
+                    if (window.addEventListener) {
+                    window.addEventListener("message", onMessage, false);        
+                    } 
+                    else if (window.attachEvent) {
+                        window.attachEvent("onmessage", onMessage, false);
+                    }
+                
+                    function onMessage(event) {
+                        // Check sender origin to be trusted
+                        if (event.origin !== "http://80.210.70.4:3333"){
+                        console.log('not allowed')
+                        return;
+                        } 
+                
+                        var data = event.data;
+                
+                        if (typeof(window[data.func]) == "function") {
+                            window[data.func].call(null, data.message);
+                        }
+                    }
+                
+                    // Function to be called from iframe
+                    function parentFunc(message) {
+                        const http = new XMLHttpRequest()
+                        http.open('POST', 'http://localhost:8080/token', true)
+                        http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
+                        let token = {
+                            token: message
+                        }
+                        http.send(JSON.stringify(token)) 
+                        http.onload = function() {
+                            var jsonSkatBalance = http.responseText
+                            renderSkat(jsonSkatBalance)
+
+                        } 
 
 
-            const httpPy = new XMLHttpRequest()
-                httpPy.open('POST', 'http://localhost:5000/token', true)
-                httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                // httpPy.setRequestHeader('content-type', 'application/xml');
-                let token1 = message
-                httpPy.send("name=" + token1) 
-                httpPy.onload = function() {
-                    renderBank(httpPy.responseText)
+                        const httpPy = new XMLHttpRequest()
+                            httpPy.open('POST', 'http://localhost:8081/token', true)
+                            httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+                            let token1 = message
+                            httpPy.send("name=" + token1) 
+                            httpPy.onload = function() {
+                                renderBank(httpPy.responseText)
 
-                }  
+                            }
+                        }  
 
-            }  
+                        function renderSkat(userInformationJSON){
+                            document.getElementById("view-button-skat").hidden = false
 
-            function renderSkat(userInformationJSON){
-            let jsonDiv = document.getElementById("user-information-json")
-                jsonDiv.innerHTML = userInformationJSON;
-            }
+                            // jsonDiv.innerHTML = userInformationJSON;      //This works
 
-            function renderBank(userInformationXML){
+                            document.getElementById("view-button-skat").addEventListener("click", function() {
+                                displaySkat(userInformationJSON);
+                            }, false);
 
-                let xmlDiv = document.getElementById("user-information-xml")
-                xmlDiv.innerHTML = userInformationXML;
-           
-            }
-          </script>
-          
+                            displaySkat(userInformationJSON)
+
+                        }
+
+                        function renderBank(userInformationXML){
+                            document.getElementById("view-button-bank").hidden = false
+
+                            // xmlDiv.innerHTML = userInformationXML;       //This works
+
+                            document.getElementById("view-button-bank").addEventListener("click", function() {
+                                displayBank(userInformationXML);
+                            }, false);
+
+
+                            displayBank(userInformationXML)
+                        }
+
+                        function displayBank(userInformationXML){
+                            console.log(userInformationXML)
+
+                            document.getElementById("user-information-xml").hidden = false;
+                            document.getElementById("user-name").hidden = false;
+
+                            let bankField = document.getElementsByClassName("user-bank-balance");
+                            let xmlDiv = document.getElementById("user-information-xml")
+
+                            bankField.innerText = userInformationXML;   //Why does this not work
+                            bankField.innerHTML = userInformationXML;
+
+
+                        }
+
+                        function displaySkat(userInformationJSON){
+                            console.log(userInformationJSON)
+                            document.getElementById("user-information-json").hidden = false;
+                            document.getElementById("user-name").hidden = false;
+
+                            let skatField = document.getElementsByClassName("user-skat-balance");
+                            let jsonDiv = document.getElementById("user-information-json");
+
+                            skatField.innerText = userInformationJSON;  //Why does this not work
+                            skatField.innerHTML = userInformationJSON;
+
+
+                        }
+                </script>
+
+                </div>
+
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-dark" id="view-button-skat" hidden>View SKAT Debt</button>
+                    <button type="button" class="btn btn-dark" id="view-button-bank" hidden>View Bank Balance</button>
+                    <br/>
+                    <br/>
+
+
+                    <br/>
+                    <div class="row" id="data-fields">
+                        
+                        <div class="col-lg-2" id="user-name" hidden>
+                            <p class="user-name-field"> </p>
+                            <p>User Name</p>
+                        </div>
+
+                        <div class="col-lg-2" id="user-information-json" hidden>
+                            <p class="user-skat-balance"> </p>
+                            <p>User Skat Balance</p>
+                        </div>
+
+                        <div class="col-lg-2" id="user-information-xml" hidden>
+                            <p class="user-bank-balance"></p>
+                            <p>User Bank Balance</p>
+                        </div>
+
+                    </div>
+                </div>
     </div>
-
-    <div id="user-information-json">
-
-    </div>
-
-    <div id="user-information-xml">
-
-    </div>
-
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
