@@ -1,9 +1,8 @@
 {
     "scripts": {
         "js-server": "nodemon server1.js",
-        "py-server": "py server2.py"
+        "py-server": "python server2.py"
     },
-
     "dependencies": {
         "express": "4.17.1",
         "request": "2.88.0",

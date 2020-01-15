@@ -52,9 +52,7 @@
                         http.onload = function() {
                             var jsonSkatBalance = http.responseText
                             renderSkat(jsonSkatBalance)
-
                         } 
-
 
                         const httpPy = new XMLHttpRequest()
                             httpPy.open('POST', 'http://localhost:8081/token', true)
@@ -70,54 +68,43 @@
                         function renderSkat(userInformationJSON){
                             document.getElementById("view-button-skat").hidden = false
 
-                            // jsonDiv.innerHTML = userInformationJSON;      //This works
-
                             document.getElementById("view-button-skat").addEventListener("click", function() {
+                                document.getElementById("user-information-json").hidden = false;
+                                document.getElementById("user-name").hidden = false;
                                 displaySkat(userInformationJSON);
                             }, false);
-
-                            displaySkat(userInformationJSON)
 
                         }
 
                         function renderBank(userInformationXML){
                             document.getElementById("view-button-bank").hidden = false
 
-                            // xmlDiv.innerHTML = userInformationXML;       //This works
-
                             document.getElementById("view-button-bank").addEventListener("click", function() {
+                                document.getElementById("user-information-xml").hidden = false;
+                                document.getElementById("user-name").hidden = false;
                                 displayBank(userInformationXML);
                             }, false);
 
-
-                            displayBank(userInformationXML)
                         }
 
                         function displayBank(userInformationXML){
-                            console.log(userInformationXML)
 
-                            document.getElementById("user-information-xml").hidden = false;
-                            document.getElementById("user-name").hidden = false;
-
-                            let bankField = document.getElementsByClassName("user-bank-balance");
+                            let bankField = document.getElementById("user-bank-balance");
                             let xmlDiv = document.getElementById("user-information-xml")
 
-                            bankField.innerText = userInformationXML;   //Why does this not work
-                            bankField.innerHTML = userInformationXML;
-
+                            bankField.innerText = userInformationXML;
 
                         }
 
                         function displaySkat(userInformationJSON){
                             console.log(userInformationJSON)
-                            document.getElementById("user-information-json").hidden = false;
-                            document.getElementById("user-name").hidden = false;
 
-                            let skatField = document.getElementsByClassName("user-skat-balance");
+
+                            let skatField = document.getElementById("user-skat-balance");
                             let jsonDiv = document.getElementById("user-information-json");
 
                             skatField.innerText = userInformationJSON;  //Why does this not work
-                            skatField.innerHTML = userInformationJSON;
+                            // skatField.innerHTML = userInformationJSON;
 
 
                         }
@@ -136,17 +123,17 @@
                     <div class="row" id="data-fields">
                         
                         <div class="col-lg-2" id="user-name" hidden>
-                            <p class="user-name-field"> </p>
+                            <p id="user-name-field"> </p>
                             <p>User Name</p>
                         </div>
 
                         <div class="col-lg-2" id="user-information-json" hidden>
-                            <p class="user-skat-balance"> </p>
+                            <p id="user-skat-balance"> </p>
                             <p>User Skat Balance</p>
                         </div>
 
                         <div class="col-lg-2" id="user-information-xml" hidden>
-                            <p class="user-bank-balance"></p>
+                            <p id="user-bank-balance"></p>
                             <p>User Bank Balance</p>
                         </div>
 
