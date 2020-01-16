@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/assets'));
+app.engine('html', require('ejs').renderFile);
 
 PORT_NUM = 8080
 var skatDatabase = new sqlite3.Database('./db/skat.db');
@@ -24,10 +25,28 @@ console.log('server listening on localhost:'+ PORT_NUM )
 
 })
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "/assets/views/index.html");
+});
+
+app.get('/account', (req, res) => {
+    //figure out how to send this file, doesnt update
+    res.render(__dirname + "/assets/views/account.html");
+
+});
+
+app.post('/login', (req, res) => {
+
+    console.log(req.body.item)
+    if(req.body.item){
+        console.log("OHHHH")
+        res.redirect("/account");
+        // res.redirect(__dirname + "/assets/views/account.html")
+    }
+
 });
 
 app.post('/token', function(req, res){
+
     let tokenData = jwt.decode(req.body.token)
     let tokenEmail = tokenData.email
     let sql = `SELECT balance Balance FROM users WHERE email = ?`
@@ -41,6 +60,8 @@ app.post('/token', function(req, res){
             userSkatBalance: row.Balance
         });
     });
+    // res.redirect('/account')
+
 
 })
 

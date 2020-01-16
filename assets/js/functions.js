@@ -11,7 +11,7 @@ function renderSkat(userInformationJSON){
 
 function renderBank(userInformationXML){
     document.getElementById("view-button-bank").hidden = false
-
+    //extract data from xml and pass to function
     document.getElementById("view-button-bank").addEventListener("click", function() {
         document.getElementById("user-information-xml").hidden = false;
         document.getElementById("user-name").hidden = false;

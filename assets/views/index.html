@@ -17,7 +17,6 @@
             <div class="col-lg-12">
                 <p>Please log in to NemID to see your information</p>
                 <iframe height="225px" width="200px" frameborder="0" src="http://80.210.70.4:3333/easyid-form.php"></iframe>
-
                 <script>
 
                     if (window.addEventListener) {
@@ -43,27 +42,45 @@
                 
                     // Function to be called from iframe
                     function parentFunc(message) {
-                        const http = new XMLHttpRequest()
-                        http.open('POST', 'http://localhost:8080/token', true)
-                        http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
-                        let token = {
-                            token: message
+                        const loginRequest = new XMLHttpRequest()
+                        loginRequest.open('POST', 'http://localhost:8080/login', true)
+                        loginRequest.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
+                        let item = {
+                            item: message
                         }
-                        http.send(JSON.stringify(token)) 
-                        http.onload = function() {
-                            var jsonSkatBalance = http.responseText
-                            renderSkat(jsonSkatBalance)
-                        } 
+                        loginRequest.send(JSON.stringify(item)) 
+                        loginRequest.onload = function() {
+                            // var jsonSkatBalance = http.responseText
+                            // console.log(https.responseText)
+                            return loginRequest.responseText
+                        }
 
-                        const httpPy = new XMLHttpRequest()
-                            httpPy.open('POST', 'http://localhost:8081/token', true)
-                            httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                            let token1 = message
-                            httpPy.send("name=" + token1) 
-                            httpPy.onload = function() {
-                                renderBank(httpPy.responseText)
 
-                            }
+
+                        // const http = new XMLHttpRequest()
+                        // http.open('POST', 'http://localhost:8080/token', true)
+                        // http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
+                        // let token = {
+                        //     token: message
+                        // }
+                        // http.send(JSON.stringify(token)) 
+                        // http.onload = function() {
+                        //     // var jsonSkatBalance = http.responseText
+                        //     console.log(http.responseText)
+                        //     renderSkat(http.responseText)
+                        // } 
+
+                        // const httpPy = new XMLHttpRequest()
+                        //     httpPy.open('POST', 'http://localhost:8081/token', true)
+                        //     httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+                        //     let token1 = message
+                        //     httpPy.send("name=" + token1) 
+                        //     httpPy.onload = function() {
+                        //         renderBank(httpPy.responseText)
+
+                        //     }
+
+                        
                         }  
 
                 </script>
