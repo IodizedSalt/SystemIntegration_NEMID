@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="index.css">   
+    <link rel="stylesheet" type="text/css" href="./css/index.css">   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script type="text/javascript" src="./js/functions.js"></script> 
 
 </head>
 <body>
@@ -18,7 +19,7 @@
                 <iframe height="225px" width="200px" frameborder="0" src="http://80.210.70.4:3333/easyid-form.php"></iframe>
 
                 <script>
-                
+
                     if (window.addEventListener) {
                     window.addEventListener("message", onMessage, false);        
                     } 
@@ -65,49 +66,6 @@
                             }
                         }  
 
-                        function renderSkat(userInformationJSON){
-                            document.getElementById("view-button-skat").hidden = false
-
-                            document.getElementById("view-button-skat").addEventListener("click", function() {
-                                document.getElementById("user-information-json").hidden = false;
-                                document.getElementById("user-name").hidden = false;
-                                displaySkat(userInformationJSON);
-                            }, false);
-
-                        }
-
-                        function renderBank(userInformationXML){
-                            document.getElementById("view-button-bank").hidden = false
-
-                            document.getElementById("view-button-bank").addEventListener("click", function() {
-                                document.getElementById("user-information-xml").hidden = false;
-                                document.getElementById("user-name").hidden = false;
-                                displayBank(userInformationXML);
-                            }, false);
-
-                        }
-
-                        function displayBank(userInformationXML){
-
-                            let bankField = document.getElementById("user-bank-balance");
-                            let xmlDiv = document.getElementById("user-information-xml")
-
-                            bankField.innerText = userInformationXML;
-
-                        }
-
-                        function displaySkat(userInformationJSON){
-                            console.log(userInformationJSON)
-
-
-                            let skatField = document.getElementById("user-skat-balance");
-                            let jsonDiv = document.getElementById("user-information-json");
-
-                            skatField.innerText = userInformationJSON;  //Why does this not work
-                            // skatField.innerHTML = userInformationJSON;
-
-
-                        }
                 </script>
 
                 </div>
