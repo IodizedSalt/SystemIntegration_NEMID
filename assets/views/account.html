@@ -14,62 +14,32 @@
     <div class="nem-div">
         <h1 class="display-3" id="user-name">Welcome </h1>
         <div class="row">
+            <button type="button" class="btn btn-dark" id="logout-button" > Logout </button>
             <div class="col-lg-12">
                 <!-- <p>Please log in to NemID to see your information</p> -->
-                <!-- <iframe height="225px" width="200px" frameborder="0" src="http://80.210.70.4:3333/easyid-form.php"></iframe>
+                <!-- <iframe height="225px" width="200px" frameborder="0" src="http://80.210.70.4:3333/easyid-form.php"></iframe>  -->
 
-                <script>
+                 <script>
 
-                    if (window.addEventListener) {
-                    window.addEventListener("message", onMessage, false);        
-                    } 
-                    else if (window.attachEvent) {
-                        window.attachEvent("onmessage", onMessage, false);
-                    }
-                
-                    function onMessage(event) {
-                        // Check sender origin to be trusted
-                        if (event.origin !== "http://80.210.70.4:3333"){
-                        console.log('not allowed')
-                        return;
-                        } 
-                
-                        var data = event.data;
-                
-                        if (typeof(window[data.func]) == "function") {
-                            window[data.func].call(null, data.message);
-                        }
-                    }
-                
-                    // Function to be called from iframe
-                    function parentFunc(message) {
+                    document.getElementById("logout-button").addEventListener("click", function() {
+                        window.location.href = ("http://localhost:8080/logout")
+                    }, false);        
 
-                        const https = new XMLHttpRequest()
-                        https.open('POST', 'http://localhost:8080/login', true)
-                        https.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
-                        let item = {
-                            item: message
-                        }
-                        https.send(JSON.stringify(item)) 
-                        https.onload = function() {
-                            // var jsonSkatBalance = http.responseText
-                            // console.log(https.responseText)
-                            return https.responseText
-                        }
-                        return https.responseText
+                    (function(){
 
-
-
+                        let message = check_cookie_name("userToken");
+      
                         const http = new XMLHttpRequest()
-                        http.open('POST', 'http://localhost:8080/token', true)
+                        http.open('POST', 'http://localhost:8079/token', true)
                         http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
                         let token = {
                             token: message
                         }
                         http.send(JSON.stringify(token)) 
                         http.onload = function() {
-                            var jsonSkatBalance = http.responseText
-                            renderSkat(jsonSkatBalance)
+                            // var jsonSkatBalance = http.responseText
+                            // console.log(http.responseText)
+                            renderSkat(http.responseText)
                         } 
 
                         const httpPy = new XMLHttpRequest()
@@ -79,11 +49,21 @@
                             httpPy.send("name=" + token1) 
                             httpPy.onload = function() {
                                 renderBank(httpPy.responseText)
-
                             }
-                        }  
-
-                </script> -->
+                    })();
+                    
+                    function check_cookie_name(name) 
+                            {
+                            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                            if (match) {
+                                return match[2]
+                            }
+                            else{
+                                console.log('--something went wrong---');
+                            }
+                        }
+                        
+                </script>
 
                 </div>
 

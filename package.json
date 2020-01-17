@@ -1,7 +1,8 @@
 {
     "scripts": {
-        "js-server": "nodemon server1.js",
-        "py-server": "python server2.py"
+        "dev": "nodemon app.js",
+        "js-server": " cd skat && nodemon server1.js",
+        "py-server": "cd bank && python server2.py"
     },
     "dependencies": {
         "express": "4.17.1",
@@ -10,6 +11,7 @@
         "file-system": "2.2.2",
         "jsonwebtoken": "8.5.1",
         "sqlite3": "4.1.1",
-        "ejs": "3.0.1"
+        "ejs": "3.0.1",
+        "cors": "2.8.5"
     }
 }

@@ -30,7 +30,7 @@ function displayBank(userInformationXML){
 }
 
 function displaySkat(userInformationJSON){
-    console.log(userInformationJSON)
+    // console.log(userInformationJSON)
 
 
     let skatField = document.getElementById("user-skat-balance");

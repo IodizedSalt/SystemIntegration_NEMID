@@ -16,11 +16,14 @@ CORS(app)
 
 def getNextCase():
     name = request.form["name"]
-    my_jwt = jwt.decode(name, verify=False)
+    secret = 'example_key'
+    print(name)
+    print(secret)
+    my_jwt = jwt.decode(name, secret)
 
     userEmail = my_jwt['email']
 
-    with open('./db/bank.txt', 'r') as read_file:
+    with open('./bank.txt', 'r') as read_file:
         data = json.load(read_file)
 
 

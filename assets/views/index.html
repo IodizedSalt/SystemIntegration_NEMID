@@ -42,23 +42,28 @@
                 
                     // Function to be called from iframe
                     function parentFunc(message) {
+
+                        document.cookie = "userToken="+message
+
                         const loginRequest = new XMLHttpRequest()
                         loginRequest.open('POST', 'http://localhost:8080/login', true)
                         loginRequest.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
+
                         let item = {
                             item: message
                         }
-                        loginRequest.send(JSON.stringify(item)) 
+
+                        loginRequest.send(JSON.stringify(message)) 
+
                         loginRequest.onload = function() {
-                            // var jsonSkatBalance = http.responseText
-                            // console.log(https.responseText)
-                            return loginRequest.responseText
+                            window.location.href = "http://localhost:8080/account"
+                            // return loginRequest.responseText
                         }
 
 
 
                         // const http = new XMLHttpRequest()
-                        // http.open('POST', 'http://localhost:8080/token', true)
+                        // http.open('POST', 'http://localhost:8079/token', true)
                         // http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
                         // let token = {
                         //     token: message
