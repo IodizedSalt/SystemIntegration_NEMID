@@ -1,2 +1,5 @@
+- GET vs POST in /token
+- Send XML from flask to server and retrieve balance
+
 - Application renders json/xml data nicely in browser   
     - Begin practicing coding for exam

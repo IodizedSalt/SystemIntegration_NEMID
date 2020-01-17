@@ -53,7 +53,7 @@
                             item: message
                         }
 
-                        loginRequest.send(JSON.stringify(message)) 
+                        loginRequest.send(JSON.stringify(item)) 
 
                         loginRequest.onload = function() {
                             window.location.href = "http://localhost:8080/account"

@@ -30,7 +30,10 @@ app.post('/token', function(req, res){
 
     // let tokenData = jwt.decode(req.body.token, 'exampleKey')
     let tokenData = jwt.verify(req.body.token, "example_key")
+
     let tokenEmail = tokenData.email
+    let tokenName = tokenData.name
+
     let sql = `SELECT balance Balance FROM users WHERE email = ?`
 
     skatDatabase.each(sql, [tokenEmail], (err, row) => {
@@ -39,7 +42,8 @@ app.post('/token', function(req, res){
         }
         res.json({
             userEmail: tokenEmail,
-            userSkatBalance: row.Balance
+            userSkatBalance: row.Balance,
+            userName: tokenName
         });
     });
 

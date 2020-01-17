@@ -28,7 +28,7 @@
                     (function(){
 
                         let message = check_cookie_name("userToken");
-      
+                        
                         const http = new XMLHttpRequest()
                         http.open('POST', 'http://localhost:8079/token', true)
                         http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
@@ -37,8 +37,10 @@
                         }
                         http.send(JSON.stringify(token)) 
                         http.onload = function() {
-                            // var jsonSkatBalance = http.responseText
-                            // console.log(http.responseText)
+
+                            let userName = JSON.parse(http.responseText)["userName"]
+                            document.getElementById("user-name").innerText += " " + userName
+
                             renderSkat(http.responseText)
                         } 
 
@@ -56,10 +58,12 @@
                             {
                             var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
                             if (match) {
+                                // console.log(match[2])
                                 return match[2]
                             }
                             else{
-                                console.log('--something went wrong---');
+                                alert('401 Error');
+                                window.location.href = "http://localhost:8080/"
                             }
                         }
                         
@@ -76,11 +80,6 @@
 
                     <br/>
                     <div class="row" id="data-fields">
-                        
-                        <div class="col-lg-2" id="user-name" hidden>
-                            <p id="user-name-field"> </p>
-                            <p>User Name</p>
-                        </div>
 
                         <div class="col-lg-2" id="user-information-json" hidden>
                             <p id="user-skat-balance"> </p>

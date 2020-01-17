@@ -17,8 +17,7 @@ CORS(app)
 def getNextCase():
     name = request.form["name"]
     secret = 'example_key'
-    print(name)
-    print(secret)
+
     my_jwt = jwt.decode(name, secret)
 
     userEmail = my_jwt['email']
@@ -29,7 +28,7 @@ def getNextCase():
 
     userBankBalance = data['users'][userEmail]
 
-    top = Element('XML-DATA')
+    top = Element('DATA')
 
     user = SubElement(top, 'user-email')
     user.text = userEmail
@@ -38,8 +37,8 @@ def getNextCase():
     balance.text = str(userBankBalance)
 
     # print(tostring(top))
-
-    return tostring(top)
+    
+    return top
 
 # app.run(host='localhost', port=8081, reloader=0)
 if __name__ == "__main__":

@@ -25,6 +25,9 @@ function displayBank(userInformationXML){
     let bankField = document.getElementById("user-bank-balance");
     // let xmlDiv = document.getElementById("user-information-xml")
 
+    let bankBalance = userInformationXML
+    console.log(bankBalance)
+    
     bankField.innerText = userInformationXML;
 
 }
@@ -35,8 +38,8 @@ function displaySkat(userInformationJSON){
 
     let skatField = document.getElementById("user-skat-balance");
     // let jsonDiv = document.getElementById("user-information-json");
-
-    skatField.innerText = userInformationJSON;  //Why does this not work
+    let skatBalance = JSON.parse(userInformationJSON)['userSkatBalance']
+    skatField.innerText = skatBalance;  //Why does this not work
     // skatField.innerHTML = userInformationJSON;
 
 
