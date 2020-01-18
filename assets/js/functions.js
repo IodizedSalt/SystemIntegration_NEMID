@@ -15,7 +15,10 @@ function renderBank(userInformationXML){
     document.getElementById("view-button-bank").addEventListener("click", function() {
         document.getElementById("user-information-xml").hidden = false;
         document.getElementById("user-name").hidden = false;
-        displayBank(userInformationXML);
+        var p = new DOMParser()
+        xmldoc = p.parseFromString(userInformationXML, 'text/xml')
+        let balance = xmldoc.childNodes.item(0).childNodes.item(1).textContent
+        displayBank(balance);
     }, false);
 
 }

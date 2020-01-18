@@ -36,9 +36,9 @@ def getNextCase():
     balance = SubElement(top, 'balance')
     balance.text = str(userBankBalance)
 
-    # print(tostring(top))
+    print(tostring(top))
     
-    return top
+    return tostring(top)
 
 # app.run(host='localhost', port=8081, reloader=0)
 if __name__ == "__main__":
