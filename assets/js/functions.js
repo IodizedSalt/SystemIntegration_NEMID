@@ -9,41 +9,33 @@ function renderSkat(userInformationJSON){
 
 }
 
+function displaySkat(userInformationJSON){
+
+    let skatField = document.getElementById("user-skat-balance");
+    let skatBalance = JSON.parse(userInformationJSON)['userSkatBalance']
+    skatField.innerText = skatBalance;
+
+
+}
+
 function renderBank(userInformationXML){
     document.getElementById("view-button-bank").hidden = false
-    //extract data from xml and pass to function
+
     document.getElementById("view-button-bank").addEventListener("click", function() {
         document.getElementById("user-information-xml").hidden = false;
         document.getElementById("user-name").hidden = false;
+
         var p = new DOMParser()
         xmldoc = p.parseFromString(userInformationXML, 'text/xml')
-        let balance = xmldoc.childNodes.item(0).childNodes.item(1).textContent
+        var balance = xmldoc.getElementsByTagName("Balance")[0].innerHTML;
         displayBank(balance);
     }, false);
 
 }
 
 function displayBank(userInformationXML){
-
-    let bankField = document.getElementById("user-bank-balance");
-    // let xmlDiv = document.getElementById("user-information-xml")
-
-    let bankBalance = userInformationXML
-    console.log(bankBalance)
-    
+    let bankField = document.getElementById("user-bank-balance");    
     bankField.innerText = userInformationXML;
 
 }
 
-function displaySkat(userInformationJSON){
-    // console.log(userInformationJSON)
-
-
-    let skatField = document.getElementById("user-skat-balance");
-    // let jsonDiv = document.getElementById("user-information-json");
-    let skatBalance = JSON.parse(userInformationJSON)['userSkatBalance']
-    skatField.innerText = skatBalance;  //Why does this not work
-    // skatField.innerHTML = userInformationJSON;
-
-
-}

@@ -1,8 +1,6 @@
 const express = require('express')
 var app = express();
 var bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken')
-const sqlite3 = require('sqlite3').verbose();
 
 app.use(bodyParser.json());
 
@@ -37,7 +35,6 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-
         res.redirect("/account");
 });
 

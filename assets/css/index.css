@@ -2,13 +2,35 @@
     text-align: center;
 }
 
-#data-fields{
-    padding-left: 30%;
-    /* padding-right: 30%; */
-}
 
 body{
     /* background-color: (238,243,242,1) !important; */
     background-color: rgba(238,243,242,1) !important;
+
+}
+
+#user-information-json{
+    background-color: rgb(255, 255, 255);
+    align-content: center;
+    text-align: center;
+
+    /* margin-top:  0px;
+    margin-bottom:  0px; */
+
+}
+
+#user-information-xml{
+    background-color: rgb(255, 255, 255);
+    align-content: center;
+    text-align: center;
+/* 
+    margin-top: 0px;
+    margin-bottom:  0px; */
+
+}
+
+#data-fields{
+    text-align: center;
+    align-content: center;
 
 }

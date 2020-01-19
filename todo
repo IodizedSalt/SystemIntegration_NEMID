@@ -1,5 +1,27 @@
-- GET vs POST in /token
-- Send XML from flask to server and retrieve balance
+Define and code:
+    - Python Dictionary
+    - Pickling/Unpickling
 
-- Application renders json/xml data nicely in browser   
-    - Begin practicing coding for exam
+// == complete
+
+Convert:
+    Javascript:
+        JSON -> CSV
+        JSON -> XML
+
+        CSV -> JSON
+        CSV -> XML
+
+        XML -> JSON
+        XML -> CSV
+
+    Python:
+
+        // JSON -> CSV 
+        // JSON -> XML
+
+        CSV -> JSON
+        CSV -> XML
+
+        XML -> JSON
+        XML -> CSV

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <title>Easy ID</title>
     <link rel="stylesheet" type="text/css" href="./css/index.css">   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script type="text/javascript" src="./js/functions.js"></script> 
@@ -49,50 +49,22 @@
                         loginRequest.open('POST', 'http://localhost:8080/login', true)
                         loginRequest.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
 
-                        let item = {
-                            item: message
+                        let token = {
+                            token: message
                         }
 
-                        loginRequest.send(JSON.stringify(item)) 
+                        loginRequest.send(JSON.stringify(token)) 
 
                         loginRequest.onload = function() {
                             window.location.href = "http://localhost:8080/account"
-                            // return loginRequest.responseText
                         }
-
-
-
-                        // const http = new XMLHttpRequest()
-                        // http.open('POST', 'http://localhost:8079/token', true)
-                        // http.setRequestHeader('Content-type', 'application/json;charset=UTF-8')
-                        // let token = {
-                        //     token: message
-                        // }
-                        // http.send(JSON.stringify(token)) 
-                        // http.onload = function() {
-                        //     // var jsonSkatBalance = http.responseText
-                        //     console.log(http.responseText)
-                        //     renderSkat(http.responseText)
-                        // } 
-
-                        // const httpPy = new XMLHttpRequest()
-                        //     httpPy.open('POST', 'http://localhost:8081/token', true)
-                        //     httpPy.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                        //     let token1 = message
-                        //     httpPy.send("name=" + token1) 
-                        //     httpPy.onload = function() {
-                        //         renderBank(httpPy.responseText)
-
-                        //     }
-
-                        
                         }  
 
                 </script>
 
                 </div>
 
-                <div class="col-lg-12">
+                <!-- <div class="col-lg-12">
                     <button type="button" class="btn btn-dark" id="view-button-skat" hidden>View SKAT Debt</button>
                     <button type="button" class="btn btn-dark" id="view-button-bank" hidden>View Bank Balance</button>
                     <br/>
@@ -118,7 +90,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
     </div>
     
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

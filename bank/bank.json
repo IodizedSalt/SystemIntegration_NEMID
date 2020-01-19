@@ -1,0 +1,9 @@
+[{
+    "user": "a@a.com",
+    "balance": 123.78
+},
+{
+    "user": "b@b.com",
+    "balance": 542.12
+}
+]
