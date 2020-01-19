@@ -21,7 +21,6 @@ def getNextCase():
     my_jwt = jwt.decode(name, secret)
 
     userEmail = my_jwt['email']
-
     with open('./bank.json', 'r') as read_file:
             data = json.load(read_file)
 
@@ -30,16 +29,17 @@ def getNextCase():
     uls = SubElement(body, 'Balance')
 
     for i in data:
-        top = Element('DATA')
-        body = SubElement(top, 'User')
-        uls = SubElement(body, 'Balance')
-        
-        body.text = i['user']
-        uls.text =  str(i['balance'])
+        if(i['user'] == userEmail):
+            top = Element('DATA')
+            body = SubElement(top, 'User')
+            uls = SubElement(body, 'Balance')
+            
+            body.text = i['user']
+            uls.text =  str(i['balance'])
 
-        tree_out = tostring(top, encoding="UTF-8")
-        print(tree_out)
-        return tree_out
+            tree_out = tostring(top, encoding="UTF-8")
+            print(tree_out)
+            return tree_out
 
 
 if __name__ == "__main__":
