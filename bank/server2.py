@@ -22,25 +22,6 @@ def getNextCase():
 
     userEmail = my_jwt['email']
 
-    # with open('./bank.json', 'r') as read_file:
-    #     data = json.load(read_file)
-
-
-    # userBankBalance = data['users'][userEmail]
-
-    # top = Element('DATA')
-
-    # user = SubElement(top, 'user-email')
-    # user.text = userEmail
-
-    # balance = SubElement(top, 'balance')
-    # balance.text = str(userBankBalance)
-
-    # print(tostring(top))
-    
-    # return tostring(top)
-
-
     with open('./bank.json', 'r') as read_file:
             data = json.load(read_file)
 

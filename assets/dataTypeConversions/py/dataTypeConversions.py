@@ -12,7 +12,16 @@ def xmlToJson():
 
 # CSV - > JSON
 def csvToJson():
-    pass
+    csvfile = open("./csv.csv", 'r')
+    jsonfile = open("./csvtojson.json", 'w')
+
+    reader = csv.DictReader( csvfile)
+    jsonfile.write('[')
+
+    for row in reader:
+        json.dump(row, jsonfile)
+        jsonfile.write(',\n')
+    jsonfile.write(']')
 
 # CSV - > XML
 def csvToXml():
@@ -64,5 +73,6 @@ def jsonToXml():
         tree_out = tostring(top, encoding="UTF-8")
         print(tree_out)
 
-jsonToXml()       #complete
-jsonToCsv()       #complete
+# jsonToXml()       #complete
+# jsonToCsv()       #complete
+csvToJson()       # half complete, fix trailing comma
