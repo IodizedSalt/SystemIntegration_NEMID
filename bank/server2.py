@@ -25,17 +25,17 @@ def getNextCase():
             data = json.load(read_file)
 
     top = Element('DATA')
-    body = SubElement(top, 'Users')
-    uls = SubElement(body, 'Balance')
+    user = SubElement(top, 'Users')
+    balance = SubElement(user, 'Balance')
 
     for i in data:
         if(i['user'] == userEmail):
             top = Element('DATA')
-            body = SubElement(top, 'User')
-            uls = SubElement(body, 'Balance')
+            user = SubElement(top, 'User')
+            balance = SubElement(user, 'Balance')
             
-            body.text = i['user']
-            uls.text =  str(i['balance'])
+            user.text = i['user']
+            balance.text =  str(i['balance'])
 
             tree_out = tostring(top, encoding="UTF-8")
             print(tree_out)

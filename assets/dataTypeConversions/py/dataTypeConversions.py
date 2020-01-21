@@ -1,4 +1,4 @@
-from xml.etree.ElementTree import Element, SubElement, Comment, tostring
+from xml.etree.ElementTree import Element, SubElement, Comment, tostring, fromstring, ElementTree
 import json
 import csv
 
@@ -8,37 +8,60 @@ def xmlToCsv():
 
 # XML - > JSON
 def xmlToJson():
-    pass
+    xmlFile = open('xml.xml', 'r')
+
+    tree = ElementTree(fromstring(xmlFile))
+    print(tree)
+
 
 # CSV - > JSON
 def csvToJson():
-    csvfile = open("./csv.csv", 'r')
-    jsonfile = open("./csvtojson.json", 'w')
+    csvFile = open('csv.csv', 'r')
+    jsonFile = open('./csvTo/csvtojson.json', 'w')
 
-    reader = csv.DictReader( csvfile)
-    jsonfile.write('[')
+    data = []
+    for row in csv.DictReader(csvFile):
+        data.append(row)
 
-    for row in reader:
-        json.dump(row, jsonfile)
-        jsonfile.write(',\n')
-    jsonfile.write(']')
+    jsonFile.write(json.dumps(data))
 
 # CSV - > XML
 def csvToXml():
-    pass 
+    csvFile = open('csv.csv', 'r') 
+    xmlFile = open('./csvTo/csvtoxml.xml', 'wb')
+
+    
+    for row in csv.DictReader(csvFile):
+        top = Element('DATA')
+        body = SubElement(top, 'User')
+        uls = SubElement(body, 'Balance')
+
+        body.text = row['user']
+        uls.text =  row['balance']
+        
+        tree_out = tostring(top, encoding="UTF-8")
+        xmlFile.write(tree_out)
+        xmlFile.write(b'\n')
+        print(tree_out)
+
 
 # JSON - > CSV
 def jsonToCsv():
+
+    csvFile = open('./jsonTo/jsontocsv.csv', 'w')
+
     with open('./json.json', 'r') as read_file:
         data = read_file.read()
 
     jsonobj = json.loads(data)
 
     keylist = []
+
     for key in jsonobj[0]:
         keylist.append(key)
-        f = csv.writer(open('./csv.csv', "w"))
-        f.writerow(keylist)
+        f = csv.writer(csvFile)
+
+    f.writerow(keylist)
     
     for record in jsonobj:
         currentrecord = []
@@ -50,11 +73,13 @@ def jsonToCsv():
         line = f.readline()
         while line:
             line = f.readline()
+            # csvFile.write(line)
             print(line)
 
 
 # JSON - > XML
 def jsonToXml():
+    xmlFile = open('./jsonTo/jsontoxml.xml', 'wb')
     with open('./json.json', 'r') as read_file:
         data = json.load(read_file)
 
@@ -71,8 +96,15 @@ def jsonToXml():
         uls.text =  str(i['balance'])
 
         tree_out = tostring(top, encoding="UTF-8")
+        xmlFile.write(tree_out)
+        xmlFile.write(b'\n')
         print(tree_out)
 
-# jsonToXml()       #complete
-# jsonToCsv()       #complete
-csvToJson()       # half complete, fix trailing comma
+# csvToXml()
+# csvToJson()
+
+# jsonToXml()
+# jsonToCsv()
+
+
+xmlToJson()
