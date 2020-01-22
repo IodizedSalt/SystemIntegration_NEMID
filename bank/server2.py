@@ -21,6 +21,7 @@ def getNextCase():
     my_jwt = jwt.decode(name, secret)
 
     userEmail = my_jwt['email']
+
     with open('./bank.json', 'r') as read_file:
             data = json.load(read_file)
 

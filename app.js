@@ -10,7 +10,6 @@ app.use(express.static(__dirname + '/assets'));
 app.engine('html', require('ejs').renderFile);
 
 
-
 PORT_NUM = 8080
 
 app.listen(PORT_NUM, function(err){
@@ -27,6 +26,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/account', (req, res) => {
+    //Do cookie check here
     res.sendFile(__dirname + "/assets/views/account.html");
 });
 

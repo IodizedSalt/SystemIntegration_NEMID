@@ -44,7 +44,6 @@ app.post('/token', function(req, res){
             userName: tokenName
         });
     });
-
 })
 
 process.on('SIGINT', () => {

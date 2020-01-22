@@ -15,7 +15,6 @@ function displaySkat(userInformationJSON){
     let skatBalance = JSON.parse(userInformationJSON)['userSkatBalance']
     skatField.innerText = skatBalance;
 
-
 }
 
 function renderBank(userInformationXML){
