@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/account', (req, res) => {
-    //Do cookie check here
     res.sendFile(__dirname + "/assets/views/account.html");
 });
 
@@ -37,4 +36,5 @@ app.get('/logout', (req, res) => {
 app.post('/login', (req, res) => {
         res.redirect("/account");
 });
+
 

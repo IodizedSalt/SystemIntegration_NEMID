@@ -14,7 +14,6 @@ app.engine('html', require('ejs').renderFile);
 
 var skatDatabase = new sqlite3.Database('./skat.db');
 
-
 PORT_NUM = 8079
 
 app.listen(PORT_NUM, function(err){
@@ -22,6 +21,7 @@ app.listen(PORT_NUM, function(err){
         console.log('error');
         return;
 }
+
 console.log('server listening on localhost:'+ PORT_NUM )
 })
 
